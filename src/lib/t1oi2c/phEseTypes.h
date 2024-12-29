@@ -22,8 +22,9 @@
 typedef uint8_t utf8_t;     /* UTF8 Character String */
 typedef uint8_t bool_t;     /* boolean data type */
 typedef uint16_t ESESTATUS; /* Return values */
-
+#ifndef ENABLE_T1oI2C_LOGS
 #define ENABLE_T1oI2C_LOGS 0
+#endif
 
 #if ENABLE_T1oI2C_LOGS
 #define T_SMLOG_I(...) SMLOG_I(__VA_ARGS__)

@@ -420,7 +420,9 @@ ESESTATUS phNxpEse_read(void *conn_ctx, uint32_t *data_len, uint8_t **pp_data)
             T_SMLOG_E("Rsp buffer is small \n");
             return ESESTATUS_FAILED;
         }
-        T_SMLOG_MAU8_D("RAW Rx<", nxpese_ctxt->p_read_buff, ret);
+        if (nxpese_ctxt->p_read_buff != NULL) {
+            T_SMLOG_MAU8_D("RAW Rx<", nxpese_ctxt->p_read_buff, ret);
+        }
         *data_len = ret;
         //*pp_data  = nxpese_ctxt->p_read_buff;
         status = ESESTATUS_SUCCESS;

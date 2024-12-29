@@ -29,7 +29,9 @@
  * 4: DEBUG
  * 5: APDU
  */
+#ifndef DEBUG_LEVEL
 #define DEBUG_LEVEL 0
+#endif
 
 #if DEBUG_LEVEL > 0
     #define SMLOG_E smlog_print
@@ -54,7 +56,7 @@
 #else
     #define SMLOG_D smlog_none
 #endif
-    
+
 #if DEBUG_LEVEL > 4
     #define SMLOG_AU8_D(BUF, LEN)                                       \
         smlog_print("%s", ":");                                         \
@@ -92,8 +94,6 @@
 #ifndef TRUE
 #define TRUE true
 #endif
-
-#define SE050_ENA_PIN 98
 
 #ifdef __cplusplus
 extern "C" {

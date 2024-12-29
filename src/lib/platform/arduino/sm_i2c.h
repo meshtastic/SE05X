@@ -37,6 +37,9 @@
 #define I2C_OK 12
 #define I2C_FAILED 13
 #define I2C_BUS_0 (0)
+#ifndef NXP_WIRE
+#define NXP_WIRE Wire3
+#endif
 
 typedef unsigned int i2c_error_t;
 

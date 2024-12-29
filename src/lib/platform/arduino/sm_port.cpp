@@ -18,6 +18,7 @@
 */
 
 #include "../../platform/arduino/sm_port.h"
+#include <cstdarg>
 
 void smlog_print(const char *format, ...) {
     char debug_buf[1024];   

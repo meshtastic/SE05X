@@ -20,12 +20,13 @@
 #include "../../platform/arduino/sm_i2c.h"
 #include <Wire.h>
 
+
 i2c_error_t axI2CInit(void **conn_ctx, const char *pDevName) {
     (void)conn_ctx;
     (void)pDevName;
 
-    Wire3.begin();
-    Wire3.setClock(1000000);
+    NXP_WIRE.begin();
+    NXP_WIRE.setClock(1000000);
     return I2C_OK;
 }
 
@@ -33,7 +34,7 @@ void axI2CTerm(void *conn_ctx, int mode) {
     (void)conn_ctx;
     (void)mode;
 
-    Wire3.end();
+    NXP_WIRE.end();
 }
 
 i2c_error_t axI2CWrite(void *conn_ctx, unsigned char bus, unsigned char addr, unsigned char *pTx, unsigned short txLen) {
@@ -41,9 +42,9 @@ i2c_error_t axI2CWrite(void *conn_ctx, unsigned char bus, unsigned char addr, un
     (void)bus;
 
     addr = addr >> 1;
-    Wire3.beginTransmission(addr);
-    Wire3.write(pTx, txLen);
-    if (Wire3.endTransmission() != 0) {
+    NXP_WIRE.beginTransmission(addr);
+    NXP_WIRE.write(pTx, txLen);
+    if (NXP_WIRE.endTransmission() != 0) {
         return I2C_FAILED;
     }
 
@@ -56,10 +57,10 @@ i2c_error_t axI2CRead(void *conn_ctx, unsigned char bus, unsigned char addr, uns
     addr = addr >> 1;
     int retries = 20;
 
-    while (Wire3.requestFrom((uint8_t)addr, (size_t)rxLen, (bool)true) != rxLen && retries--);
-    
-    for (size_t i = 0; Wire3.available(); i++) {
-        pRx[i] = Wire3.read();
+    while (NXP_WIRE.requestFrom((uint8_t)addr, (size_t)rxLen, (bool)true) != rxLen && retries--);
+
+    for (size_t i = 0; NXP_WIRE.available(); i++) {
+        pRx[i] = NXP_WIRE.read();
     }
 
     return I2C_OK;

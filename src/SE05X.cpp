@@ -88,9 +88,10 @@ SE05XClass::~SE05XClass() { }
 int SE05XClass::begin()
 {
     smStatus_t status;
-
+    #ifdef SE050_ENA_PIN
     pinMode(SE050_ENA_PIN, OUTPUT);
     digitalWrite(SE050_ENA_PIN, HIGH);
+    #endif
 
     _se05x_session = {0,0,{0,},0,0,0,0,0,0,0,0};
 
